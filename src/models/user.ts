@@ -6,8 +6,9 @@ export const Index = async (): Promise<User[]> => {
     const sql = "SELECT * from users";
     const conn = await db.connect();
     const data = await conn.query(sql);
-    conn.release();
 
+    conn.release();
+    
     return data.rows;
   } catch (error) {
     return Promise.reject();
@@ -27,11 +28,7 @@ export const Show = async (id: number): Promise<User> => {
   }
 };
 
-export const Create = async (user: {
-  first_name: string;
-  last_name: string;
-  password: string;
-}): Promise<User> => {
+export const Create = async (user: User): Promise<User> => {
   try {
     const sql =
       "INSERT INTO users (first_name, last_name, password) VALUES($1, $2, $3) RETURNING *";

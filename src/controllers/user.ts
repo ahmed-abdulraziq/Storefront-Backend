@@ -31,15 +31,17 @@ export const create = async (req: Request, res: Response): Promise<void> => {
         const hash = bcrypt.hashSync(req.body.password,  salt);
 
         const user = {
-            first_name: req.body.firstname as string,
-            last_name: req.body.lastname as string,
+            first_name: req.body.first_name as string,
+            last_name: req.body.last_name as string,
             password: hash as string,
         };
         
         const data = await Create(user);
-
-        const token = jwt.sign(data.id.toString(), process.env.JWT as string);
         
+        const id = data.id? data.id.toString(): {};
+
+        const token = jwt.sign(id, process.env.JWT as string);
+
         res.header("access_token", token);
         res.status(200).json(data);
     } catch (err) {

@@ -4,14 +4,14 @@ import server from "../../server";
 const request = supertest(server);
 
 const product = {
-    name: "name",
-    price: 4,
-    category: 4,
+    name: "ahmed",
+    price: 2,
+    category: 2,
 };
 
 describe("product controller", () => {
     it("should return success for CREATE product", async () => {
-      const response = await request.post("/api/product").send(product);
+      const response = await request.post("/api/product").send(product).set('access_token', 'eyJhbGciOiJIUzI1NiJ9.MQ.CnKOwBExSeWUzpGc6-Php9Z1vNpHkf5UTR2lb1WxVcc');
   
       expect(response.status).toBe(200);
       expect(response.body).toBeTruthy();

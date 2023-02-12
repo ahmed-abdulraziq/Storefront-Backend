@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 import user from "./routes/api/user";
 import product from './routes/api/product';
 import orders from './routes/api/orders';
+import db from './database';
+
 
 const app: express.Application = express();
 const address: string = "0.0.0.0:3000";
