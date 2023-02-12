@@ -19,14 +19,14 @@ describe("order controller", () => {
         });
     })
     it("should return success for READ orders by user id", async () => {
-      const response = await request.get("/api/orders/1").set('access_token', 'eyJhbGciOiJIUzI1NiJ9.MQ.CnKOwBExSeWUzpGc6-Php9Z1vNpHkf5UTR2lb1WxVcc');
+      const response = await request.get("/api/orders/1").set('access_token', process.env.TOKEN as string);
   
       expect(response.status).toBe(200);
       expect(response.body).toBeTruthy();
     });
   
     it("should return success for READ orders completed by user id", async () => {
-      const response = await request.get("/api/orders/completed/1").set('access_token', 'eyJhbGciOiJIUzI1NiJ9.MQ.CnKOwBExSeWUzpGc6-Php9Z1vNpHkf5UTR2lb1WxVcc');
+      const response = await request.get("/api/orders/completed/1").set('access_token', process.env.TOKEN as string);
   
       expect(response.status).toBe(200);
       expect(response.body).toBeTruthy();
