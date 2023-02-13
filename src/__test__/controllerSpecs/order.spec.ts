@@ -18,6 +18,21 @@ describe("order controller", () => {
             category: 2,
         });
     })
+
+    it("should return success for READ orders by user id", async () => {
+        const response = await request.post("/api/orders").set('access_token', process.env.TOKEN as string);
+    
+        expect(response.status).toBe(200);
+        expect(response.body).toBeTruthy();
+    });
+
+    it("should return success for READ orders by user id", async () => {
+        const response = await request.post("/api/orders/products").set('access_token', process.env.TOKEN as string);
+    
+        expect(response.status).toBe(200);
+        expect(response.body).toBeTruthy();
+    });
+
     it("should return success for READ orders by user id", async () => {
       const response = await request.get("/api/orders/1").set('access_token', process.env.TOKEN as string);
   

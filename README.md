@@ -13,42 +13,87 @@ Your application must make use of the following libraries:
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
 
-## Steps to Completion
+### Running Ports 
+the database will start on port `5432`
+the server will start on port `3000` 
 
-### 1. Plan to Meet Requirements
+### Environment Variables
 
-In this repo there is a `REQUIREMENTS.md` document which outlines what this API needs to supply for the frontend, as well as the agreed upon data shapes to be passed between front and backend. This is much like a document you might come across in real life when building or extending an API. 
+```
+# default env
+ENV=dev
 
-Your first task is to read the requirements and update the document with the following:
-- Determine the RESTful route for each endpoint listed. Add the RESTful route and HTTP verb to the document so that the frontend developer can begin to build their fetch requests.    
-**Example**: A SHOW route: 'blogs/:id' [GET] 
+# database for dev
+DATABASE_DEV=dev
 
-- Design the Postgres database tables based off the data shape requirements. Add to the requirements document the database tables and columns being sure to mark foreign keys.   
-**Example**: You can format this however you like but these types of information should be provided
-Table: Books (id:varchar, title:varchar, author:varchar, published_year:varchar, publisher_id:string[foreign key to publishers table], pages:number)
+# database for test
+DATABASE_TEST=test
 
-**NOTE** It is important to remember that there might not be a one to one ratio between data shapes and database tables. Data shapes only outline the structure of objects being passed between frontend and API, the database may need multiple tables to store a single shape. 
+#host
+HOST=localhost
 
-### 2.  DB Creation and Migrations
+# password for database
+PASSWORD=01023749189
 
-Now that you have the structure of the databse outlined, it is time to create the database and migrations. Add the npm packages dotenv and db-migrate that we used in the course and setup your Postgres database. If you get stuck, you can always revisit the database lesson for a reminder. 
+# user for database
+USER=postgres
 
-You must also ensure that any sensitive information is hashed with bcrypt. If any passwords are found in plain text in your application it will not pass.
+# port number
+PORT=5432
 
-### 3. Models
+# jwt
+JWT = 0QaNrinsgGlwFVvSyluML14GCIe0tVOqQRN/WRlOidw=
 
-Create the models for each database table. The methods in each model should map to the endpoints in `REQUIREMENTS.md`. Remember that these models should all have test suites and mocks.
+#token for test
+TOKEN = eyJhbGciOiJIUzI1NiJ9.MQ.CnKOwBExSeWUzpGc6-Php9Z1vNpHkf5UTR2lb1WxVcc
+```
 
-### 4. Express Handlers
+### Package installation instructions
 
-Set up the Express handlers to route incoming requests to the correct model method. Make sure that the endpoints you create match up with the enpoints listed in `REQUIREMENTS.md`. Endpoints must have tests and be CORS enabled. 
+#### dependencies
+    `bcrypt`
+    `body-parser`
+    `db-migrate-pg`
+    `dotenv`
+    `express`
+    `jsonwebtoken`
+    `pg`
+    `typescript`
 
-### 5. JWTs
+#### devDependencies
+    `@types/bcrypt`
+    `@types/express`
+    `@types/jasmine`
+    `@types/jsonwebtoken`
+    `@types/pg`
+    `@types/supertest`
+    `jasmine`
+    `jasmine-spec-reporter`
+    `supertest`
+    `ts-node`
+    `tsc-watch`
 
-Add JWT functionality as shown in the course. Make sure that JWTs are required for the routes listed in `REQUIUREMENTS.md`.
+### Setup db and server instructions
 
-### 6. QA and `README.md`
+#### Clone the project
 
-Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database. 
+```shell
+$ git clone https://github.com/ahmed-abdulraziq/Storefront-Backend.git
+```
 
-Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+#### Run
+
+```shell
+ cd Storefront-Backend
+ npm i
+ npm start
+```
+
+#### Initialize PostgreSQL and connect to database
+
+start PostgreSQL `$ psql -h localhost -U postgres`
+create database for dev `$ CREATE DATABASE dev` or test `$ CREATE DATABASE test`
+list out all databases `$ \dt`
+connect to database dev `$ \c dev` or test `$ \c test`
+quit PostgreSQL `$ \q`
+

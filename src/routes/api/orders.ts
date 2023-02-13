@@ -8,6 +8,8 @@ router.get("/:id", verifyToken, index);
 
 router.get("/completed/:id", verifyToken, completed);
 
-router.post("/",  create);
+router.post("/", verifyToken, create);
+
+router.post("/products", verifyToken, create);
 
 export default router;

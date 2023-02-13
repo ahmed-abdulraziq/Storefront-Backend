@@ -1,7 +1,6 @@
 import { Request, Response } from "express"
 import bcrypt from "bcrypt"
 import { Index, Show, Create } from "../models/user"
-import { User } from "../type/user";
 import jwt from "jsonwebtoken";
 
 export const index = async (req: Request, res: Response): Promise<void> => {

@@ -1,14 +1,12 @@
 import { Request, Response } from "express"
-import { Completed, Create, Index } from "../models/orders";
+import { Completed, Create, CreateOrderProduct, Index } from "../models/orders";
 import { Order } from "../type/order";
+import { OrderProduct } from "../type/orderProduct";
 
 export const create = async (req: Request, res: Response): Promise<void> => {
     try {
-
         const order: Order = {
-            product_id: req.body.product_id as number,
-            quantity:  req.body.quantity as number,
-            user_id: req.body.user_id as number,
+            user_id: req.body.user_id as string,
             status:  req.body.status as string,
         };
         
@@ -16,7 +14,22 @@ export const create = async (req: Request, res: Response): Promise<void> => {
 
         res.status(200).json(data);
     } catch (err) {
-        console.log(err)
+        res.status(500).send('Error occured processing the data');
+    }
+}
+
+export const createOrderProduct = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const OrderProduct: OrderProduct = {
+            product_id: req.body.product_id as string,
+            order_id:  req.body.order_id as string,
+            quantity: req.body.quantity as number,
+        };
+        
+        const data = await CreateOrderProduct(OrderProduct);
+
+        res.status(200).json(data);
+    } catch (err) {
         res.status(500).send('Error occured processing the data');
     }
 }

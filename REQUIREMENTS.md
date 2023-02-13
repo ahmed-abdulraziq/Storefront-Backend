@@ -5,20 +5,20 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+- Index `'api/product/' [GET]`
+- Show `'api/product/id' [GET]`
+- Create [token required] `'api/product/' [post]`
 
 #### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- Index [token required] `'api/user/' [GET]`
+- Show [token required] `'api/user/id' [GET]`
+- Create N[token required] `'api/user/' [post]`
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Create (args: user id) `'api/orders/' [post]`
+- CreateOrderProduct `'api/orders/products' [post]`
+- Current Order by user (args: user id)[token required] `'api/orders/id' [GET]`
+- [OPTIONAL] Completed Orders by user (args: user id)[token required] `'api/orders/completed/id' [GET]`
 
 ## Data Shapes
 #### Product
@@ -27,11 +27,30 @@ These are the notes from a meeting with the frontend developer that describe wha
 - price
 - [OPTIONAL] category
 
+```
+TABLE Products
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    price INTEGER NOT NULL,
+    category VARCHAR(50)
+)
+```
 #### User
 - id
 - firstName
 - lastName
 - password
+
+```
+TABLE Users
+(
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL
+)
+```
 
 #### Orders
 - id
@@ -40,3 +59,13 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 - status of order (active or complete)
 
+```
+TABLE Orders
+(
+    id SERIAL PRIMARY KEY,
+    product_id INT FOREIGN KEY REFERENCES products(id),
+    quantity INTEGER DEFAULT 1,
+    user_id INT FOREIGN KEY REFERENCES users(id),
+    status VARCHAR(100)
+)
+```
