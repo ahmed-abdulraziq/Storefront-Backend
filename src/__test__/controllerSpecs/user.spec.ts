@@ -18,14 +18,14 @@ describe("User controller", () => {
     });
   
     it("should return success for READ all users", async () => {
-      const response = await request.get("/api/user")
+      const response = await request.get("/api/user").set('access_token', process.env.TOKEN as string);
   
       expect(response.status).toBe(200);
       expect(response.body).toBeTruthy();
     });
   
     it("should return success for READ user by id", async () => {
-      const response = await request.get("/api/user/1")
+      const response = await request.get("/api/user/1").set('access_token', process.env.TOKEN as string);
   
       expect(response.status).toBe(200);
       expect(response.body).toBeTruthy();
